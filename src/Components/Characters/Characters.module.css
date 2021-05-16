@@ -1,0 +1,13 @@
+.selectedPage {
+    font-weight: bold;
+}
+
+.characterBlock {
+    margin: 10px;
+}
+.filters {
+    display: inline-block
+}
+.filter {
+    margin: 10px 20px;
+}
