@@ -2,8 +2,25 @@
     font-weight: bold;
 }
 
+.mainContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.allCharacters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .characterBlock {
     margin: 10px;
+
 }
 .filters {
     display: inline-block
