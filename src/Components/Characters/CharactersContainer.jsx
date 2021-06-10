@@ -2,7 +2,16 @@ import React from 'react';
 import axios from "axios";
 import Characters from "./Characters";
 import {connect} from "react-redux";
-import {setCharacters, setCurrentPage, setPageCount, setSpecies, setStatus} from "../../Redux/charactersReducer";
+import {setLoadingStatus} from "../../Redux/commonReducer"
+import {
+    setCharacters,
+    setCurrentPage,
+    setPageCount,
+    setSpecies,
+    setStatus,
+    setGender,
+    setInformation
+} from "../../Redux/charactersReducer";
 
 
 class CharactersFun extends React.Component {
@@ -10,7 +19,6 @@ class CharactersFun extends React.Component {
     componentDidMount() {
         axios.get(`https://rickandmortyapi.com/api/character`)
             .then(resolve => {
-                debugger
                 this.props.setCharacters(resolve.data.results)
                 this.props.setCurrentPage(this.props.currentPage)
                 this.props.setPageCount(resolve.data.info.pages)
@@ -18,8 +26,8 @@ class CharactersFun extends React.Component {
     }
 
     filterSpecies = (species) => {
-        setCurrentPage(1)
-        axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.currentPage}&species=${species}`)
+        this.props.setCurrentPage(1)
+        axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.currentPage}&species=${species}&status=${this.props.status}&gender=${this.props.gender}`)
             .then(resolve => {
                 this.props.setCharacters(resolve.data.results)
                 this.props.setPageCount(resolve.data.info.pages)
@@ -27,28 +35,43 @@ class CharactersFun extends React.Component {
             })
     }
     filterStatus = (status) => {
-            axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.currentPage}&status=${status}`)
-                .then(resolve => {
-                    this.props.setCharacters(resolve.data.results)
-                    this.props.setPageCount(resolve.data.info.pages)
-                    this.props.setStatus(status)
-                })}
+        this.props.setCurrentPage(1)
+        axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.currentPage}&status=${status}&species=${this.props.species}&gender=${this.props.gender}`)
+            .then(resolve => {
+                this.props.setCharacters(resolve.data.results)
+                this.props.setPageCount(resolve.data.info.pages)
+                this.props.setStatus(status)
+            })
+    }
 
+    filterGender = (gender) => {
+        this.props.setCurrentPage(1)
+        axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.currentPage}&status=${this.props.status}&species=${this.props.species}&gender=${gender}`)
+            .then(resolve => {
+                this.props.setCharacters(resolve.data.results)
+                this.props.setPageCount(resolve.data.info.pages)
+                this.props.setGender(gender)
+            })
+    }
 
 
     onChangeNumber = (pageNumber) => {
-        // this.props.setCurrentPage(pageNumber)
-        // let page = Math.ceil(pageNumber / 2)
-        axios.get(`https://rickandmortyapi.com/api/character/?page=${pageNumber}`)
+
+        axios.get(`https://rickandmortyapi.com/api/character/?page=${pageNumber}&status=${this.props.status}&species=${this.props.species}&gender=${this.props.gender}`)
             .then(resolve => {
                 this.props.setCharacters(resolve.data.results)
                 this.props.setCurrentPage(pageNumber)
-                // if (pageNumber % 2 !== 0) {
-                //     this.currentCharacters = resolve.data.results.slice(0, 10)
-                //     this.props.setCharacters(this.currentCharacters)
-                // } else this.currentCharacters = resolve.data.results.slice(10, 20)
-                // this.props.setCharacters(this.currentCharacters)
+                this.props.setPageCount(resolve.data.info.pages)
             })
+    }
+
+    openWindow = (id) => {
+        setLoadingStatus('loading')
+        axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+            .then(resolve => {
+                this.props.setInformation({information: resolve.data})
+            })
+            .finally(() => {this.props.setLoadingStatus('successes')})
     }
 
 
@@ -60,7 +83,12 @@ class CharactersFun extends React.Component {
                         onChangeNumber={this.onChangeNumber}
                         filterSpecies={this.filterSpecies}
                         filterStatus={this.filterStatus}
-                        pageCount={this.props.pageCount}/>
+                        filterGender={this.filterGender}
+                        pageCount={this.props.pageCount}
+                        openWindow={this.openWindow}
+                        information={this.props.information}
+            />
+
         </>
     }
 }
@@ -72,7 +100,10 @@ let mapStateToProps = (state) => {
         currentPage: state.charactersPage.currentPage,
         pageCount: state.charactersPage.pageCount,
         species: state.charactersPage.species,
-        status: state.charactersPage.status
+        status: state.charactersPage.status,
+        gender: state.charactersPage.gender,
+        information: state.charactersPage.information,
+        loadingStatus: state.charactersPage.loadingStatus
     }
 }
 
@@ -82,7 +113,10 @@ const CharactersContainer = connect(mapStateToProps, {
     setCurrentPage,
     setPageCount,
     setSpecies,
-    setStatus
+    setStatus,
+    setGender,
+    setInformation,
+    setLoadingStatus
 })(CharactersFun)
 
 export default CharactersContainer;

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Characters.module.css';
 import {Grid, InputLabel} from "@material-ui/core";
 import {Pagination} from '@material-ui/lab'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
+import CharacterWindow from "../CharacterWindow/CharacterWindow";
 
 
 const Characters = (props) => {
+
+    let [characterWindowOpened, setCharacterWindowOpened] = useState(false)
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -20,13 +23,25 @@ const Characters = (props) => {
         },
     }));
 
-        const classes = useStyles();
+    const classes = useStyles();
 
-        const filterSpecies = (event) => {props.filterSpecies(event.target.value)};
-        const filterStatus = (event) => {props.filterStatus(event.target.value)};
+    const filterSpecies = (event) => {
+        props.filterSpecies(event.target.value)
+    };
+    const filterStatus = (event) => {
+        props.filterStatus(event.target.value)
+    };
+    const filterGender = (event) => {
+        props.filterGender(event.target.value)
+    };
+    const openWindow = (id) => {
+        setCharacterWindowOpened(true)
+        props.openWindow(id)
+    };
 
 
-        return <Grid className={s.mainContainer}>
+    return <Grid className={s.mainContainer}>
+        <div>
             <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel>Species</InputLabel>
                 <Select value={props.species} onChange={filterSpecies}>
@@ -45,13 +60,24 @@ const Characters = (props) => {
                     <MenuItem value={'unknown'}>Unknown</MenuItem>
                 </Select>
             </FormControl>
+            <FormControl variant="filled" className={classes.formControl}>
+                <InputLabel>Gender</InputLabel>
+                <Select value={props.gender} onChange={filterGender}>
+                    <MenuItem value={''}>All</MenuItem>
+                    <MenuItem value={'female'}>Female</MenuItem>
+                    <MenuItem value={'male'}>Male</MenuItem>
+                    <MenuItem value={'genderless'}>Genderless</MenuItem>
+                    <MenuItem value={'unknown'}>Unknown</MenuItem>
+                </Select>
+            </FormControl>
+        </div>
         <div className={s.allCharacters}>
             {props.characters.map(u =>
                 <div key={u.id} className={s.characterBlock}>
                     <div>
-                        < img
-                            src={u.image}
-                            className={s.img}/>
+                        < img alt={''} onClick={() => openWindow(u.id)}
+                              src={u.image}
+                              className={s.img}/>
                     </div>
                     <div>{u.name}</div>
 
@@ -61,6 +87,10 @@ const Characters = (props) => {
 
         <Pagination count={props.pageCount} page={props.currentPage} variant="outlined" shape="rounded"
                     onChange={(e, selectedPage) => props.onChangeNumber(selectedPage)}/>
+
+        {characterWindowOpened
+            ? <CharacterWindow setCharacterWindowOpened={setCharacterWindowOpened} information={props.information}/>
+            : <div>{}</div>}
     </Grid>
 
 };

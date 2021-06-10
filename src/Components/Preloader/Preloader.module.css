@@ -1,0 +1,29 @@
+.background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: black;
+    opacity: 0.3;
+    z-index: 20;
+}
+
+.window {
+    width: 600px;
+    height: 400px;
+    background-color: rgb(102, 157, 231);;
+    border: red 2px solid;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 21;
+    bottom: auto;
+    right: auto;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
