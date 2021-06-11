@@ -14,6 +14,9 @@ const CharacterWindow = (props) => {
         <Preloader/>
         <div className={s.background}>{}</div>
         {loadingStatus === 'successes' && <div className={s.window}>
+            <div >
+                <img className={s.img} src={props.information.information.image}/>
+            </div>
             <div>
                 <span>Name: </span>
                 <span>{props.information.information.name}</span>

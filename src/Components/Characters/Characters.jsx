@@ -48,7 +48,11 @@ const Characters = (props) => {
                     <MenuItem value={''}>All</MenuItem>
                     <MenuItem value={'human'}>Human</MenuItem>
                     <MenuItem value={'alien'}>Alien</MenuItem>
-                    <MenuItem value={'mythologicalCreature'}>Mythological Creature</MenuItem>
+                    <MenuItem value={'mytholog'}>Mythological Creature</MenuItem>
+                    <MenuItem value={'cronenberg'}>Cronenberg</MenuItem>
+                    <MenuItem value={'disease'}>Disease</MenuItem>
+                    <MenuItem value={'humanoid'}>Humanoid</MenuItem>
+                    <MenuItem value={'robot'}>Robot</MenuItem>
                 </Select>
             </FormControl>
             <FormControl variant="filled" className={classes.formControl}>

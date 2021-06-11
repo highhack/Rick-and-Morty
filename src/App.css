@@ -1,18 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eater&display=swap');
 .app-wrapper {
+  font-family: 'Eater', cursive;
+  font-size: 18px;
   margin: 0 auto;
   line-height: 26px;
   display: grid;
-  width: 1400px;
+  width: 100vw;
   grid-template-areas:
-  "h h"
+  /*"h h"*/
   "n c";
 
-  grid-template-rows: 60px 1fr;
+  /*grid-template-rows: 60px 1fr;*/
   grid-template-columns: 2fr 10fr;
 }
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: rgb(111, 122, 112);
+  background: #a77777;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 

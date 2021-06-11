@@ -1,8 +1,18 @@
 
-.nav {
+.navContainer {
     grid-area: n;
-    background-color: rgb(72, 46, 222);
-    padding: 15px;
+    background-color: rgb(150 202 22);
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    padding-top: 80px;
+}
+
+.item {
+    margin: 10px 0
 }
 
 .item a {
@@ -12,4 +22,10 @@
 
 .item a.active {
     color: rgb(205, 67, 238);
+}
+
+.img {
+    width: 200px;
+    height: auto;
+    border-radius: 100px/140px;
 }

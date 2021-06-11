@@ -1,13 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import s from './Nav.module.css';
-import image from "../../folder_UI/logo.jpg";
+import logo from '../../folder_UI/img.png'
+import s from './Header.module.css';
+import {NavLink} from "react-router-dom";
 
-
-const Nav = () => {
+const Header = () => {
     return (
-        <div className={s.nav}>
-            <nav className={s.navContainer}>
+        <div>
+            <div className={s.header}>
+                <img alt={''} src={logo}/>
+            </div>
+            <nav className={s.nav}>
                 <div className = {s.item}>
                     <NavLink to = '/Characters' activeClassName = {s.active}>Characters</NavLink>
                 </div>
@@ -20,11 +22,9 @@ const Nav = () => {
                 <div className = {s.item}>
                     <NavLink to = '/MyWatchList' activeClassName = {s.active}>My Watch List</NavLink>
                 </div>
-                <img className={s.img} src={image}/>
             </nav>
         </div>
-
     )
 }
 
-export default Nav
+export default Header

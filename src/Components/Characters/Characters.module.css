@@ -20,11 +20,17 @@
 
 .characterBlock {
     margin: 10px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .filters {
     display: inline-block
 }
 .filter {
     margin: 10px 20px;
+}
+.img {
+    border: 2px solid;
+    border-radius: 5px;
 }
