@@ -10,10 +10,8 @@
 }
 
 .window {
-    width: 600px;
-    height: 400px;
-    background-color: rgb(102, 157, 231);;
-    border: red 2px solid;
+    width: 160px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -22,8 +20,12 @@
     z-index: 21;
     bottom: auto;
     right: auto;
-    border-radius: 5px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.img {
+    width: 100%;
+    height: auto;
 }

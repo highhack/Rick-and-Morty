@@ -1,4 +1,3 @@
-import episodesReducer from "./episodesReducer";
 
 const initialState = {
     loadingStatus: 'idle'

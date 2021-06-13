@@ -10,7 +10,8 @@ let initialState = {
     species: '',
     status: '',
     gender: '',
-    information: {}
+    information: {},
+    characterWindowOpened: false
 }
 
 const charactersReducer = (state = initialState, action) => {
@@ -27,12 +28,14 @@ const charactersReducer = (state = initialState, action) => {
             return {...state, status: action.status}
         case 'SET-GENDER':
             return {...state, gender: action.gender}
-            case 'SET-INFORMATION':
-            return {...state, information: action.information}
+        case 'SET-INFORMATION':
+           let b = {...state, information: action.information}
+           return b
+        case 'SET-CHARACTER-WINDOW-OPENED':
+            let a =  {...state, characterWindowOpened: action.characterWindowOpened}
+            return  a
         // case SET_CHARACTERS_TOTAL_COUNT:
         //     return {...state, totalCharactersCount: action.count}
-        // case TOGGLE_IS_FETCHING:
-        //     return {...state, isFetching: action.isFetching}
         default:
             return state
     }
@@ -45,6 +48,7 @@ export const setSpecies = (species) => ({type: 'SET-SPECIES', species})
 export const setStatus = (status) => ({type: 'SET-STATUS', status})
 export const setGender = (gender) => ({type: 'SET-GENDER', gender})
 export const setInformation = (information) => ({type: 'SET-INFORMATION', information})
+export const setCharacterWindowOpened = (characterWindowOpened) => ({type: 'SET-CHARACTER-WINDOW-OPENED', characterWindowOpened})
 // export const setCharactersTotalCount = (totalCharactersCount) => ({type: SET_CHARACTERS_TOTAL_COUNT, count: totalCharactersCount})
 // export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
 

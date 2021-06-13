@@ -10,18 +10,21 @@ import {
     setSpecies,
     setStatus,
     setGender,
-    setInformation
+    setInformation,
+    setCharacterWindowOpened
 } from "../../Redux/charactersReducer";
 
 
 class CharactersFun extends React.Component {
 
     componentDidMount() {
+        // this.props.setLoadingStatus('loading')
         axios.get(`https://rickandmortyapi.com/api/character`)
             .then(resolve => {
                 this.props.setCharacters(resolve.data.results)
                 this.props.setCurrentPage(this.props.currentPage)
                 this.props.setPageCount(resolve.data.info.pages)
+                // this.props.setLoadingStatus('successes')
             })
     }
 
@@ -69,9 +72,16 @@ class CharactersFun extends React.Component {
         setLoadingStatus('loading')
         axios.get(`https://rickandmortyapi.com/api/character/${id}`)
             .then(resolve => {
-                this.props.setInformation({information: resolve.data})
-            })
-            .finally(() => {this.props.setLoadingStatus('successes')})
+                this.props.setInformation({...resolve.data})
+                this.props.setLoadingStatus('successes')
+                this.props.setCharacterWindowOpened(true)
+            } )
+    }
+
+    hideWindow = () =>  {
+        this.props.setCharacterWindowOpened(false)
+        setLoadingStatus('idle')
+        this.props.setInformation({})
     }
 
 
@@ -86,7 +96,10 @@ class CharactersFun extends React.Component {
                         filterGender={this.filterGender}
                         pageCount={this.props.pageCount}
                         openWindow={this.openWindow}
+                        hideWindow={this.hideWindow}
                         information={this.props.information}
+                        // setInformation={this.props.setInformation}
+                        characterWindowOpened={this.props.characterWindowOpened}
             />
 
         </>
@@ -103,7 +116,8 @@ let mapStateToProps = (state) => {
         status: state.charactersPage.status,
         gender: state.charactersPage.gender,
         information: state.charactersPage.information,
-        loadingStatus: state.charactersPage.loadingStatus
+        loadingStatus: state.charactersPage.loadingStatus,
+        characterWindowOpened: state.charactersPage.characterWindowOpened
     }
 }
 
@@ -116,7 +130,8 @@ const CharactersContainer = connect(mapStateToProps, {
     setStatus,
     setGender,
     setInformation,
-    setLoadingStatus
+    setLoadingStatus,
+    setCharacterWindowOpened
 })(CharactersFun)
 
 export default CharactersContainer;

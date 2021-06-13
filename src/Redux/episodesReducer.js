@@ -2,6 +2,7 @@ let initialState = {
     episodes: [],
     episodePageCount: null,
     currentEpisodesPage: 1,
+    valueNumber: ''
 }
 
 const episodesReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const episodesReducer = (state = initialState, action) => {
             return {...state, currentEpisodesPage: action.currentEpisodesPage}
         case 'SET-EPISODE-PAGE-COUNT':
             return {...state, episodePageCount: action.episodePageCount}
+            case 'SET-VALUE-NUMBER':
+            return {...state, valueNumber: action.valueNumber}
         default:
             return state
     }
@@ -22,6 +25,7 @@ export const setCurrentEpisodesPage = (currentEpisodesPage) => ({
     currentEpisodesPage
 })
 export const setEpisodePageCount = (episodePageCount) => ({type: 'SET-EPISODE-PAGE-COUNT', episodePageCount})
+export const setValueNumber = (valueNumber) => ({type: 'SET-VALUE-NUMBER', valueNumber})
 
 
 export default episodesReducer

@@ -4,7 +4,7 @@ import s from './MyWatchList.module.css';
 
 const MyWatchList = (props) => {
     return (
-        <div>
+        <div className={s.myWathList}>
             MyWatchList
         </div>
 

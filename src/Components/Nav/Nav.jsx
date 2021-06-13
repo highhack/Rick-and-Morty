@@ -20,8 +20,9 @@ const Nav = () => {
                 <div className = {s.item}>
                     <NavLink to = '/MyWatchList' activeClassName = {s.active}>My Watch List</NavLink>
                 </div>
-                <img className={s.img} src={image}/>
+                <img alt={''} className={s.img} src={image}/>
             </nav>
+
         </div>
 
     )

@@ -9,7 +9,7 @@ const Preloader = () => {
         loadingStatus === "loading"
             ? <div>
                 <div className={s.background}>{}</div>
-                <div className={s.window}><img alt={''} src={loading}/></div>
+                <div className={s.window}><img className={s.img} alt={''} src={loading}/></div>
             </div>
             : <div>{}</div>
     );

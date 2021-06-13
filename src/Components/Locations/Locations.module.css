@@ -4,6 +4,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    width: 90%;
 }
 .header {
     font-weight: bold;
@@ -12,6 +13,17 @@
 
 }
 
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+}
+.searchForm {
+    margin: 8px;
+    min-width: 120px;
+}
 
 th, td {
     padding: 10px;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './Characters.module.css';
 import {Grid, InputLabel} from "@material-ui/core";
 import {Pagination} from '@material-ui/lab'
@@ -11,7 +11,7 @@ import CharacterWindow from "../CharacterWindow/CharacterWindow";
 
 const Characters = (props) => {
 
-    let [characterWindowOpened, setCharacterWindowOpened] = useState(false)
+    // let [characterWindowOpened, setCharacterWindowOpened] = useState(false)
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -34,11 +34,7 @@ const Characters = (props) => {
     const filterGender = (event) => {
         props.filterGender(event.target.value)
     };
-    const openWindow = (id) => {
-        setCharacterWindowOpened(true)
-        props.openWindow(id)
-    };
-
+    const openWindow = (id) => {props.openWindow(id)};
 
     return <Grid className={s.mainContainer}>
         <div>
@@ -92,8 +88,11 @@ const Characters = (props) => {
         <Pagination count={props.pageCount} page={props.currentPage} variant="outlined" shape="rounded"
                     onChange={(e, selectedPage) => props.onChangeNumber(selectedPage)}/>
 
-        {characterWindowOpened
-            ? <CharacterWindow setCharacterWindowOpened={setCharacterWindowOpened} information={props.information}/>
+        {props.characterWindowOpened
+            ? <CharacterWindow
+                 hideWindow={props.hideWindow}
+                information={props.information}
+            />
             : <div>{}</div>}
     </Grid>
 
