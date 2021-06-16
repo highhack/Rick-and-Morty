@@ -18,13 +18,13 @@ import {
 class CharactersFun extends React.Component {
 
     componentDidMount() {
-        // this.props.setLoadingStatus('loading')
+        this.props.setLoadingStatus('loading')
         axios.get(`https://rickandmortyapi.com/api/character`)
             .then(resolve => {
                 this.props.setCharacters(resolve.data.results)
                 this.props.setCurrentPage(this.props.currentPage)
                 this.props.setPageCount(resolve.data.info.pages)
-                // this.props.setLoadingStatus('successes')
+                this.props.setLoadingStatus('successes')
             })
     }
 
@@ -59,13 +59,13 @@ class CharactersFun extends React.Component {
 
 
     onChangeNumber = (pageNumber) => {
-
+        this.props.setLoadingStatus('loading')
         axios.get(`https://rickandmortyapi.com/api/character/?page=${pageNumber}&status=${this.props.status}&species=${this.props.species}&gender=${this.props.gender}`)
             .then(resolve => {
                 this.props.setCharacters(resolve.data.results)
                 this.props.setCurrentPage(pageNumber)
                 this.props.setPageCount(resolve.data.info.pages)
-            })
+            }).finally(this.props.setLoadingStatus('successes'))
     }
 
     openWindow = (id) => {

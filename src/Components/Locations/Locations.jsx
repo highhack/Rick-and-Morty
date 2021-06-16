@@ -8,6 +8,8 @@ const Locations = (props) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [locationsPage, setLocationsPage] = useState(props.locations.slice(0, 25))
     const [nameValue, setNameValue] = useState('')
+    const [typeValue, setTypeValue] = useState('')
+    const [dimensionValue, setDimensionValue] = useState('')
 
 
     useEffect(() => {
@@ -25,6 +27,8 @@ const Locations = (props) => {
     }
 
     const onChangeLocationName = (e) => {
+        setTypeValue('')
+        setDimensionValue('')
         setNameValue(e.currentTarget.value)
         if (e.currentTarget.value === '') {
             onChangeLocationsPage(props.currentPage)
@@ -38,6 +42,46 @@ const Locations = (props) => {
                 }
             }
             setLocationsPage(n)
+            props.setCountLocationsPages(Math.floor((n.length)/25))
+        }
+    }
+
+    const onChangeLocationType = (e) => {
+        setNameValue('')
+        setDimensionValue('')
+        setTypeValue(e.currentTarget.value)
+        if (e.currentTarget.value === '') {
+            onChangeLocationsPage(props.currentPage)
+            setLocationsPage(props.locations.slice(0, 25))
+        } else {
+            let n = []
+            for (let i = 0; i < props.locations.length; i++) {
+                let a = props.locations[i].type.toLowerCase().search(e.currentTarget.value)
+                if (a !== -1) {
+                    n.push(props.locations[i])
+                }
+            }
+            setLocationsPage(n)
+            props.setCountLocationsPages(Math.floor((n.length)/25))
+        }
+    }
+    const onChangeLocasionDimension = (e) => {
+        setNameValue('')
+        setTypeValue('')
+        setDimensionValue(e.currentTarget.value)
+        if (e.currentTarget.value === '') {
+            onChangeLocationsPage(props.currentPage)
+            setLocationsPage(props.locations.slice(0, 25))
+        } else {
+            let n = []
+            for (let i = 0; i < props.locations.length; i++) {
+                let a = props.locations[i].dimension.toLowerCase().search(e.currentTarget.value)
+                if (a !== -1) {
+                    n.push(props.locations[i])
+                }
+            }
+            setLocationsPage(n)
+            props.setCountLocationsPages(Math.floor((n.length)/25))
         }
     }
 
@@ -49,10 +93,10 @@ const Locations = (props) => {
                            variant="filled"/>
             </form>
             <form className={s.searchForm} noValidate autoComplete="off">
-                <TextField id="filled-basic-episode" label="Number of episode" variant="filled"/>
+                <TextField value={typeValue} onChange={onChangeLocationType} id="filled-basic-type" label="Type" variant="filled"/>
             </form>
             <form className={s.searchForm} noValidate autoComplete="off">
-                <TextField id="filled-basic-episode" label="Number of episode" variant="filled"/>
+                <TextField value={dimensionValue} onChange={onChangeLocasionDimension} id="filled-basic-dimension" label="Dimension" variant="filled"/>
             </form>
         </div>
         <table className={s.table}>

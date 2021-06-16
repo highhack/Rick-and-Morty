@@ -1,7 +1,7 @@
 import React from 'react';
 import Episodes from "./Episodes";
 import {connect} from "react-redux";
-import {setEpisodes, setEpisodePageCount, setValueNumber} from "../../Redux/episodesReducer";
+import {setEpisodes, setEpisodePageCount, setValueNumber, setWatchList} from "../../Redux/episodesReducer";
 import {setLoadingStatus} from "../../Redux/commonReducer";
 import axios from "axios";
 
@@ -38,6 +38,8 @@ class EpisodeFun extends React.Component {
                       setEpisodes={this.props.setEpisodes}
                       onChangeName={this.onChangeName}
                       nameValue={this.props.nameValue}
+                      watchList={this.props.watchList}
+                      setWatchList={this.props.setWatchList}
             />
 
         </>
@@ -50,8 +52,8 @@ let mapStateToProps = (state) => {
         episodes: state.episodesPage.episodes,
         episodePageCount: state.episodesPage.episodePageCount,
         valueNumber: state.episodesPage.valueNumber,
+        watchList: state.episodesPage.watchList,
         loadingStatus: state.commonComponents.loadingStatus,
-
     }
 }
 
@@ -60,7 +62,8 @@ const EpisodesContainer = connect(mapStateToProps, {
     setEpisodes,
     setEpisodePageCount,
     setLoadingStatus,
-    setValueNumber
+    setValueNumber,
+    setWatchList
 })(EpisodeFun)
 
 export default EpisodesContainer;

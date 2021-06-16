@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Characters.module.css';
+import s from './Characters.module.scss';
 import {Grid, InputLabel} from "@material-ui/core";
 import {Pagination} from '@material-ui/lab'
 import Select from '@material-ui/core/Select';
@@ -7,11 +7,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import {makeStyles} from '@material-ui/core/styles'
 import CharacterWindow from "../CharacterWindow/CharacterWindow";
+import Preloader from "../Preloader/Preloader";
 
 
-const Characters = (props) => {
-
-    // let [characterWindowOpened, setCharacterWindowOpened] = useState(false)
+const Characters = React.memo((props) => {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -37,7 +36,9 @@ const Characters = (props) => {
     const openWindow = (id) => {props.openWindow(id)};
 
     return <Grid className={s.mainContainer}>
+
         <div>
+            <Preloader/>
             <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel>Species</InputLabel>
                 <Select value={props.species} onChange={filterSpecies}>
@@ -74,7 +75,7 @@ const Characters = (props) => {
         <div className={s.allCharacters}>
             {props.characters.map(u =>
                 <div key={u.id} className={s.characterBlock}>
-                    <div>
+                    <div className={s.imgBox}>
                         < img alt={''} onClick={() => openWindow(u.id)}
                               src={u.image}
                               className={s.img}/>
@@ -96,6 +97,6 @@ const Characters = (props) => {
             : <div>{}</div>}
     </Grid>
 
-};
+});
 
 export default Characters;

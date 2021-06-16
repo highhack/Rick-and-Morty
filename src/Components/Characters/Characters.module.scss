@@ -1,0 +1,48 @@
+
+
+.mainContainer {
+    .filters {
+        display: inline-block
+    }
+    .filter {
+        margin: 10px 20px;
+    }
+    .selectedPage {
+        font-weight: bold;
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .allCharacters {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        .characterBlock {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .img {
+                border: 2px solid;
+                border-radius: 5px;
+            }
+            :hover {
+                .img{
+                    border: solid 5px rgb(150 202 22);
+                    opacity: 0.7;
+                    background-color: darkviolet;
+                    transition: 0.9ms;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
