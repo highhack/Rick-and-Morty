@@ -19,7 +19,7 @@ const Episodes = props => {
         if (localData)
         props.setWatchList(JSON.parse(localData))
         else props.setWatchList([])
-    },[])
+    },[props])
 
     const  onChangeName = (event) => {props.onChangeName(event.currentTarget.value)}
 

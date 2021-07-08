@@ -9,25 +9,29 @@ import {setWatchList} from "../../Redux/episodesReducer";
 const MyWatchList = React.memo((props) => {
 
     // let [myWatchList, setWatchList] = useState([])
+
     let myWatchList = useSelector(state => state.episodesPage.watchList)
     let dispatch = useDispatch()
 
-    useEffect(() => {
-        if (myWatchList)
-        dispatch(setWatchList(JSON.parse(localStorage.getItem('watchList'))))
-        else dispatch(setWatchList(JSON.parse([])))
-    }, [])
+    // useEffect(() => {
+    //     debugger
+    //     if (myWatchList)
+    //     dispatch(setWatchList(JSON.parse(localStorage.getItem('watchList'))))
+    //     else dispatch(setWatchList(JSON.parse([])))
+    // }, [dispatch, myWatchList])
+    myWatchList = JSON.parse(localStorage.getItem('watchList'))
+    setWatchList(myWatchList)
 
-
-    useEffect(() => {
-        if (myWatchList)
-        myWatchList = [...myWatchList]
-    }, [myWatchList])
+    // useEffect(() => {
+    //     debugger
+    //     if (myWatchList)
+    //     myWatchList = [...myWatchList]
+    // }, [myWatchList])
 
     const removeEpisode = (id) => {
         let removeEpisode = myWatchList.find(episode => episode.id === id)
         myWatchList.splice(myWatchList.indexOf(removeEpisode), 1)
-        dispatch(setWatchList(myWatchList))
+        dispatch(setWatchList([...myWatchList]))
         localStorage.setItem('watchList', JSON.stringify(myWatchList))
     }
 
