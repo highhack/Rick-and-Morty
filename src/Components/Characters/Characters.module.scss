@@ -32,10 +32,12 @@
             }
             :hover {
                 .img{
-                    border: solid 5px rgb(150 202 22);
+                    border: solid 1px rgb(150 202 22);
                     opacity: 0.7;
                     background-color: darkviolet;
-                    transition: 0.9ms;
+                }
+                .name {
+                    color: rgb(150 202 22);
                 }
             }
         }

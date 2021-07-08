@@ -6,11 +6,9 @@ import { TextField } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { IconButton } from '@material-ui/core';
 
-
-const Episodes = React.memo((props) => {
+const Episodes = props => {
     const [currentPage, setCurrentPage] = useState(1)
     const [episodesPage, setEpisodesPage] = useState([])
-    const [disabledButton, setDisabledButton] = useState(false)
 
     useEffect(() => {
         setEpisodesPage(props.episodes.slice(0, 25))
@@ -20,6 +18,7 @@ const Episodes = React.memo((props) => {
         let localData = localStorage.getItem('watchList')
         if (localData)
         props.setWatchList(JSON.parse(localData))
+        else props.setWatchList([])
     },[])
 
     const  onChangeName = (event) => {props.onChangeName(event.currentTarget.value)}
@@ -33,7 +32,7 @@ const Episodes = React.memo((props) => {
 
     const addToWatchList = (event, id) => {
         let currentEpisode = {...props.episodes.find(episode => episode.id === id)}
-        if (props.watchList) {props.watchList.push({...currentEpisode})}
+        props.watchList.push({...currentEpisode})
         props.setWatchList(props.watchList)
         localStorage.setItem('watchList',JSON.stringify(props.watchList))
     }
@@ -78,6 +77,6 @@ const Episodes = React.memo((props) => {
         <Pagination count={2} page={currentPage} variant="outlined" shape="rounded"
                     onChange={(e, selectedPage) => onChangeEpisodesPage(selectedPage)}/>
     </div>
-});
+};
 
 export default Episodes;

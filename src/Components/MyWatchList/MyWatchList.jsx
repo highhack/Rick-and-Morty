@@ -13,11 +13,14 @@ const MyWatchList = React.memo((props) => {
     let dispatch = useDispatch()
 
     useEffect(() => {
+        if (myWatchList)
         dispatch(setWatchList(JSON.parse(localStorage.getItem('watchList'))))
+        else dispatch(setWatchList(JSON.parse([])))
     }, [])
 
 
     useEffect(() => {
+        if (myWatchList)
         myWatchList = [...myWatchList]
     }, [myWatchList])
 
@@ -28,10 +31,11 @@ const MyWatchList = React.memo((props) => {
         localStorage.setItem('watchList', JSON.stringify(myWatchList))
     }
 
+    if (myWatchList === null) return <div>Add the episodes you plan to watch</div>
     if (myWatchList.length === 0) {
         setWatchList(JSON.parse(localStorage.getItem('watchList')))
     }
-    return <div className={s.myWathList}>
+        return <div className={s.myWathList}>
         <table className={s.table}>
             <thead>
             <tr className={s.header}>
@@ -41,7 +45,7 @@ const MyWatchList = React.memo((props) => {
                 <th>URL</th>
             </tr>
             </thead>
-            {myWatchList.map(u =>
+            {[...myWatchList].map(u =>
                 <tbody>
                 <tr key={u.id} className={s.insideTable}>
                     <td>{u.name}</td>

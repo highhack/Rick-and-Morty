@@ -80,7 +80,7 @@ const Characters = React.memo((props) => {
                               src={u.image}
                               className={s.img}/>
                     </div>
-                    <div>{u.name}</div>
+                    <div className={s.name}>{u.name}</div>
 
                 </div>
             )}
