@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from './MyWatchList.module.css';
 import {IconButton} from "@material-ui/core";
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
@@ -6,27 +6,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {setWatchList} from "../../Redux/episodesReducer";
 
 
-const MyWatchList = React.memo((props) => {
+const MyWatchList = React.memo(()=> {
 
-    // let [myWatchList, setWatchList] = useState([])
 
     let myWatchList = useSelector(state => state.episodesPage.watchList)
     let dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     debugger
-    //     if (myWatchList)
-    //     dispatch(setWatchList(JSON.parse(localStorage.getItem('watchList'))))
-    //     else dispatch(setWatchList(JSON.parse([])))
-    // }, [dispatch, myWatchList])
     myWatchList = JSON.parse(localStorage.getItem('watchList'))
     setWatchList(myWatchList)
 
-    // useEffect(() => {
-    //     debugger
-    //     if (myWatchList)
-    //     myWatchList = [...myWatchList]
-    // }, [myWatchList])
 
     const removeEpisode = (id) => {
         let removeEpisode = myWatchList.find(episode => episode.id === id)
